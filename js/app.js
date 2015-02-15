@@ -5,10 +5,11 @@
 var app = angular.module('lovecraft-main', []);
 
 var mainCtrl = app.controller("MainCtrl", ['$scope', '$http', function($scope, $http) {
-    this.msg = $http.get("/api/v1/test.json").success(function(data) {
+    $http.get("/api/v1/test.json").success(function(data) {
         console.log(data);
-        return data.msg;
+        this.msg = data.msg;
     }).error(function(data, status) {
         console.log("Erroneous response:" + data + ", " + status);
+        this.msg = "FAIL";
     });
 }]);
